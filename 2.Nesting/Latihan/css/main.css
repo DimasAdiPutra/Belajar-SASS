@@ -1,0 +1,44 @@
+.main {
+  background-color: lightblue;
+}
+
+.main .main-head {
+  font-size: 2em;
+}
+
+.main .main-paragraph {
+  font-size: 1.4em;
+}
+
+.main h1,
+.main p,
+footer h1,
+footer p {
+  letter-spacing: 1px;
+}
+
+.container .main {
+  border-radius: 20px;
+  padding: 20px;
+}
+
+.main:hover {
+  background-color: aqua;
+}
+
+.main .main-head {
+  color: salmon;
+}
+
+.main .main-paragraph {
+  color: darkgray;
+}
+
+.footer .footer-head {
+  font-size: 1.2em;
+}
+
+.footer .footer-paragraph {
+  line-height: 1.5;
+}
+/*# sourceMappingURL=main.css.map */

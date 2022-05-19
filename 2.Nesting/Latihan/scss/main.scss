@@ -1,0 +1,56 @@
+.main {
+	background-color: lightblue;
+
+	.main-head {
+		font-size: 2em;
+	}
+
+	.main-paragraph {
+		font-size: 1.4em;
+	}
+}
+
+.main,
+footer {
+	h1,
+	p {
+		letter-spacing: 1px;
+	}
+}
+
+.main {
+	.container & {
+		border-radius: 20px;
+		padding: 20px;
+	}
+
+	&:hover {
+		background-color: aqua;
+	}
+
+	// &-head {
+	// 	color: salmon;
+	// }
+
+	// &-paragraph {
+	// 	color: darkgray;
+	// }
+
+	& &-head {
+		color: salmon;
+	}
+
+	& &-paragraph {
+		color: darkgray;
+	}
+}
+
+.footer {
+	& &-head {
+		font-size: 1.2em;
+	}
+
+	& &-paragraph {
+		line-height: 1.5;
+	}
+}

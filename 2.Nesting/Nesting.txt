@@ -1,0 +1,131 @@
+Oke misal kita membuat sebuah file scss didalam folder scss yang nantinya ingin kita compile dan kita jadikan file css yang kita simpan di folder css, untuk melakukan itu kita perlu melakukan configurasi pada live sass compiler kita untuk merubah path tempat hasil compile kita disimpan, kita bisa membuka setting di bagian extension dan cari live sass compiler lalu pilih yang formats, dan secara otomatis akan diarahkan ke file setting.json, disitu kalian tinggal ganti pathnya saja.
+
+Oke sekarang kita bahas mengenai nesting, Nesting adalah sebuah cara untuk menuliskan syntax css secara bersarang, di materi sebelumnya kita sempat mencoba sedikit mengenai nesting ini, tapi sekarang kita akan membahasnya lebih detail
+
+Contoh penggunaan Nesting :
+
+Syntax css biasa
+
+.main {
+  background-color: lightblue;
+}
+
+.main .main-head {
+  font-size: 2em;
+}
+
+.main .main-paragraph {
+  font-size: 1.4em;
+}
+
+dengan menggunakan scss kita bisa mengubah code diatas menjadi bersarang seperti ini
+
+.main {
+  background-color: lightblue;
+
+  .main-heading {
+    font-size: 2em;
+  }
+
+  .main-paragraph {
+    font-size: 1.4em;
+  }
+}
+
+saat dicompile hasilnya akan sama seperti contoh pertama
+
+Tapi, satu hal yang perlu kita tahu, gaya penulisan seperti itu ada hubungannya dengan specificity, jadi gunakan dengan berhati-hati, karena kadang kita lebih baik tidak perlu menuliskan selector yang terlalu spesifik.
+
+Contoh lain kegunaan nesting, jika kita ingin memberikan style ke 2 selector sekaligus, contohnya
+
+h1, p {
+  letter-spacing: 1px;
+}
+
+dengan begitu code diatas akan men-selector semua h1 dan p yang kita punya, padahal kita inginnya hanya h1 dan p yang ada di main dan footer saja, dengan syntax css biasa, kita bisa menulisnya seperti ini
+
+.main h1, .main p, footer h1, footer p {
+  letter-spacing: 1px;
+}
+
+tapi dengan nesting concept pada scss kita bisa menulisnya seperti ini
+
+.main, .footer {
+  h1, p {
+    letter-spacing: 1px;
+  }
+}
+
+memang sedikit membingungkan jika kita masih belum terbiasa, tapi dengan penulisan seperti ini akan lebih rapih, dan lebih simple
+
+dengan sass, kita juga bisa mentarget parent element dengan character &, character & ini bisa juga kita anggap sebagai pengganti selector utama kita, dalam contoh dibawah & adalah pengganti .main
+
+.main {
+  .container & {
+    background-color: green;
+  }
+  
+  .main-head {
+    font-size: 2em;
+  }
+}
+
+kita juga bisa gunakan untuk menambahkan pseudo-class seperti hover, dll
+
+&:hover {
+  background-color: aqua;
+}
+
+Lalu karena character & ini bisa digunakan sebagai pengganti dari selector utama kita, kita bisa menggunakannya jika kita menggunakan penulisan konsep BEM seperti
+
+&-head {
+  color: salmon;
+}
+
+&-paragraph {
+  color: darkgray;
+}
+
+tapi dengan begini problemnya adalah specificitynya jadi menghilang, untuk mengatasinya kita bisa menuliskan & nya sekali lagi
+
+& &-head {
+  color: salmon;
+}
+
+& &-paragraph {
+  color: darkgray;
+}
+
+tapi sekarang problemnya jika selector utama kita bukan sebuah class, maka kita tidak bisa menggunakan & seperti diatas, misalnya
+
+footer {
+  &-head {
+    line-height: 1.5;
+  }
+}
+
+karena footer adalah element html5 dan bukan sebuah class, jika kita menulisnya seperti itu maka kita akan menarget footer-head bukan .footer-head
+
+kita juga tidak bisa menambahkan . didepannya
+
+footer {
+  .&-head {
+    line-height: 1.5;
+  }
+}
+
+jadi solusinya adalah kita memberikan class untuk footer
+
+atau nanti kita bisa mengganti & & dengan interpolasi atau kalau dijavascript di sebut template literal, contohnya:
+
+.main {
+  #{&}-head {
+    font-size: 2em;
+  }
+
+  #{&}-paragraph {
+    font-size: 1.4em;
+  }
+}
+
+tapi kita akan membahasnya lebih lanjut nanti
