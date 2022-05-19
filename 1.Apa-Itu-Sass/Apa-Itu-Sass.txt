@@ -1,0 +1,146 @@
+SASS adalah sebuah CSS Pre-Processor, dimana kita bisa menuliskan syntax css dengan lebih powerfull lagi, karena memiliki lebih banyak fitur.
+
+Sebelum masuk ke pembelajaran ada baiknya jika kita mengetahui tentang apa itu CSS Pre-Processor dan apa itu SASS lebih dulu.
+
+Jika biasanya kita menghubungkan file html dan css lalu mengedit file cssnya secara langsung, dengan CSS Pre-Processor kita tetap menghubungkan file html kita dengan file css tapi kita tidak perlu mengedit file cssnya secara langsung lagi, karena kita akan mengedit file css kita dengan sebuah file yang nantinya akan di Compile dengan sebuah compiler khusus, sehingga nanti file yang kita compile akan secara otomatis diterjemahkan ke file css yang akan kita hubungkan dengan file html kita.
+
+Kenapa disebut CSS Pre-Processor? Karena file yang kita compile ini akan di lakukan sebelum di proses oleh html
+
+Kenapa pakai CSS Pre-Processor? Oke, kita ambil jQuery sebagai contohnya, meskipun 2 hal ini berbeda.
+
+tapi misalnya ada sebuah code jQuery seperti ini
+
+$('.tombol').on('click', function() {
+  alert('Hello World');
+});
+
+Maka yang terjadi di belakang layar adalah jQuery akan menjalankan code Javascript berikut
+const tombol = document.querySelector('.tombol');
+tombol.addEventListener('click', function() {
+  alert('Hello World');
+});
+
+Jadi disini bisa kita simpulkan bahwa sebenarnya jQuery itu akan digunakan untuk membungkus code javascript kita supaya kita tidak perlu menulis terlalu banyak code, atau kita ambil contoh dari bahasa pemrograman lain seperti php
+
+dengan framework laravel kita bisa menulis code seperti ini
+
+$users = DB::table('users')->get();
+
+maka framework ini sebenarnya akan menjalankan sebuah code php native seperti ini
+
+$conn = mysqli_connect('localhost', 'root', 'root', 'db_test');
+$result = mysqli_query($conn, "SELECT * FROM users");
+$users = [];
+while(user = mysqli_fetch_assoc($result)) {
+  $users[] = $user;
+}
+
+Jadi bisa kita lihat sama seperti library jQuery tadi framework ini juga membuat code kita menjadi lebih singkat, dan dengan CSS Pre-Processor kurang lebih sama seperi itu. contohnya (note: Jangan perdulikan codenya lebih dulu)
+
+$myFont: Helvetica, sans-serif
+$primary-color: #333
+
+nav
+  font-family: $myFont
+  color: $primary-color
+  ul
+    margin: 0
+    padding: 0
+    list-style: none
+  li
+    display: iniline-block
+
+code diatas setelah kita compile akan menjadi sebuah code css seperti dibawah ini
+
+nav {
+  font-family: Helvetica, sans-serif;
+  color: #333;
+}
+
+nav ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+nav li {
+  display: inline-block;
+}
+
+nah file css inilah yang nantinya akan diproses oleh html kita.
+
+Kenapa ada CSS Pre-Processor? Karena pada saat dibuat dulu ada beberapa kekurangan pada css, jika kita mengabaikan fitur baru css sekarang kita akan menemukan beberapa kekurangan css pada saat css pre-processor dibuat
+
+- Tidak ada variable
+- Tidak ada function
+- Tidak ada modularisasi
+- Tidak bisa melakukan operasi dan logika pemrograman
+- Banyak duplikasi code
+
+dan CSS Pre-Processor memungkinkan kita untuk melakukan itu semua, meskipun saat ini di tahun 2022 kita bisa melakukan beberapa hal diatas, tapi kita abaikan dulu untuk saat ini, karena css pre-processor juga bisa digunakan untuk membuat code css yang lebih singkat.
+
+Solusi dari Pre-Processor
+- Variable
+- Mixin
+- Import and users
+- Operator dan Built-in Function
+- Nested CSS
+
+Beberapa Css Pre-processor yang populer di tahun 2022 ini adalah
+- SASS
+- Stylus
+- PostCSS
+- Less
+
+Tapi untuk kali ini kita akan belajar SASS
+
+Menurut situs resmi SASS nya jika kita lihat apa itu SASS, mereka bilang "Sass is the most mature, stable, and powerful professional grade CSS extension language in the world." - https://sass-lang.com/
+
+jadi kita bisa menulis code css biasa di dalam file sass, tapi ada baiknya kita harus paham dulu dengan css biasa,
+
+Kita bisa menggunakan sass dengan menginstallnya langsung lewat situs resminya atau jika kita menggunakan vs code kita bisa menginstall sebuah extensions yang bernama Live Sass Compiler untuk meng-compile file sass kita didalam vscode
+
+Alasan menggunakan SASS:
+- Mempermudah Penulisan
+- Mempermudah Pengelolaan
+- Memiliki banyak fungsi built-in
+- Kita dapat membuat fungsi sendiri
+- Kita dapat memodifikasi framework css jika kita sudah paham betul mengenai Sass
+- Banyak yang masih menggunakan Sass
+
+Sebenarnya kita tidak terlalu perlu menggunakan CSS Preprocessor jika kita hanya membuat project kecil atau membuat project sendiri, tapi jika kita membuat sebuah project yang lebih besar atau kita masuk ke sebuah perusahaan dan bekerja dalam tim, biasanya kita baru akan membutuhkan Sass ini.
+
+dan sebelum menulis syntax Sass kita perlu tahu tentang SASS dan SCSS
+
+Apa perbedaannya? keduanya sama, tapi ini adalah pilihan gaya penulisan syntaxnya dengan bentuk sass yang kita lihat diawal atau scss yang lebih mirip dengan css.
+
+disini kita akan bergantian mencoba ke2nya karena saya juga masih belum tahu lebih enak menggunakan yang mana, tapi jangan khawatir karena ke2nya akan dicompile ke dalam bentuk css.
+
+Contoh ke2nya
+SASS :
+
+nav
+  ul
+    margin: 0
+    padding: 0
+    list-style: none
+  li
+    display: inline-block
+
+
+SCSS :
+
+nav {
+  ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  li {
+    display: inline-block;
+  }
+}
+
+
+Oke, Sekarang silahkan kalian install lebih dulu SASS-nya, disini saya akan menginstall vscode extension live sass Compiler, Setelah itu kita akan mencoba beberapa syntax sass termasuk bagaimana cara meng-compile file sass kita
