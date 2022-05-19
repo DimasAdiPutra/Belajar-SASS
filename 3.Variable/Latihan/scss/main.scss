@@ -1,0 +1,41 @@
+// Css Variable
+// :root {
+// 	--primary-color: aqua;
+// 	--secondary-color: lightblue;
+// 	--text-color: salmon;
+// }
+
+// body {
+// 	color: var(--secondary-color);
+// }
+
+// h1 {
+// 	color: var(--text-color);
+// }
+
+// Sass Variable
+$primary_color: aqua;
+$secondary-color: lightblue;
+$text_color: salmon;
+
+// Sass Map
+$alert: (
+	"danger": red,
+	"success": green,
+	"warning": yellow,
+);
+
+body {
+	$text-color: darkgrey !global;
+	$secondary-color: pink;
+	color: $text-color;
+	background-color: $secondary_color;
+}
+
+h1 {
+	color: $text-color;
+}
+
+p {
+	color: map-get($alert, "warning");
+}

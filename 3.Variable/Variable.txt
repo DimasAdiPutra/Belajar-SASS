@@ -1,0 +1,122 @@
+kita tahu bahwa di dalam bahasa pemrograman itu ada variable, tapi css bukan bahasa pemrograman, karena itu css tidak memiliki variable, meskipun sekarang di tahun 2022 css sudah bisa menggunakan variable juga, kita akan lihat perbedaan variable pada css dan variable pada sass.
+
+Untuk membuat sebuah variable dengan css biasa kita harus membuatnya didalam sebuah element lebih dulu, nah biasanya supaya semuanya bisa mengakses variablenya kita akan membuatnya di element html atau :root, untuk membuat sebuah variable kita bisa membuatnya dengan diawali --nama-variable contohnya
+
+:root {
+  --primary-color: aqua;
+  --secondary-color: lightblue;
+  --text-color: salmon;
+}
+
+untuk memakainya kita bisa langsung menggunakannya sebagai berikut
+
+body {
+  color: var(--text-color);
+}
+
+oke jadi ini adalah bagaimana cara menggunakan variable pada css biasa, kelebihannya kita tidak perlu menggunakan compiler, tapi pembuatannya masih terbilang cukup rumit, dengan sass kita hanya perlu menggunakan $namaVariable dan tidak perlu memasukannya ke dalam element manapun untuk global scopenya
+
+$primary-color: aqua;
+$secondary-color: lightblue;
+$text-color: salmon;
+
+dan cara menggunakannya pun cukup mudah
+
+body {
+  color: $text-color;
+}
+
+sekarang kita akan mempelajari perilaku variable pada sass,
+
+1. Sass akan menganggap dash(-) pada variable sama dengan underscore(_), jadi misalnya
+
+$primary-color: blue;
+$socondary_color: red;
+
+h1 {
+  color: $primary_color;
+}
+
+p {
+  color: $secodary-color;
+}
+
+kalian mungkin berpikir kalau penulisan ini terbalik tapi, sass memang menganggap kedua character itu sama, jadi kita bisa menulisnya bagaimanapun
+
+2. Variable pada Sass juga memiliki scope, misal kita membuat sebuah variable yang ada dibagian terluar atau kita tidak memasukannya kedalam element apapun, maka secara otomatis itu akan menjadi variable global scope yang mana sebuah element bisa menggunakannya, tapi misal kita menulisnya seperti ini
+
+body {
+  $primary-color: blue;
+  color: $primary-color;
+}
+
+h1 {
+  background-color: $primary-color;
+}
+
+maka h1 tidak akan bisa mengakses variable $primary-color didalam body karena variable didalam body hanya berlaku untuk body dan nested element didalamnya (note: ingat nested element bukan child element), contohnya
+
+body {
+  $primary-color: blue;
+  color: $primary-color;
+
+  h1 {
+    background-color: $primary-color;
+  }
+}
+
+sebenarnya ada cara untuk mengubah variable local menjadi variable global dengan menggunakan !global, contoh:
+
+body {
+  $primary-color: blue !global;
+  color: $primary-color;
+}
+
+h1 {
+  background-color: $primary-color;
+}
+
+dengan begini h1 juga bisa mengakses variable yang kita buat didalam body.
+
+dan karena ada variable global dan variable local, jika kita membuat 2 atau lebih variable dengan nama yang sama tapi dengan scope yang berbeda maka variable itu sepenuhnya berbeda, contoh:
+
+$primary_color: aqua;
+$secondary-color: lightblue;
+$text_color: salmon;
+
+body {
+  $primary-color: greenyellow;
+  background-color: $primary-color;
+}
+
+h1 {
+  color: $primary-color;
+}
+
+dengan begini body akan mengambil variable yang dibuat di local dan h1 akan mengambil variable yang ada di global, kecuali kita menambahkan !global di local variablenya, barulah h1 akan menggunakan variable local itu.
+
+Selain variable, Sass juga memungkinkan kita untuk membuat variable yang bisa menyimpan beberapa property dan value sekaligus bernama Map, contohnya:
+
+Misal kita ingin membuat sebuah variable yang menyimpan warna-warna yang sama dengan bootstrap, kita bisa membuatnya dengan variable sebagai berikut
+
+$alert-danger: red;
+$alert-success: green;
+$alert-warning: yellow;
+
+h1 {
+  color: $alert-warning;
+}
+
+dengan cara seperti ini memang tidak salah, tapi jika css kita semakin besar dan html kita semakin banyak elementnya dan masing-masing variable memiliki perilaku yang berbeda, daripada menulisnya berulang-ulang kita bisa menggunakan Mapi untuk menuliskannya
+
+$alert: (
+  'danger': red,
+  'success': rgb(0, 255, 0),
+  'warning': yellow
+);
+
+cara memanggilnnya kita bisa menggunakan map-get($namaVariablenya, 'variantnya');
+
+h1 {
+  color: map-get($alert, 'success');
+}
