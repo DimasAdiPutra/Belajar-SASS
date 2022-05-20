@@ -1,0 +1,96 @@
+Mixin adalah kumpulan style yang dapat kita gunakan berulang-ulang, jadi misal kita memiliki beberapa style yang ingin kita gunakan oleh beberapa selector yang berbeda, atau kita bisa menganggap ini seperti function seperti yang ada didalam bahasa pemrograman, meskipun SASS sendiri memiliki sebuah function, tapi bisa kita anggap mixin ini seperti function.
+
+Sebelum mempelajari tentang Mixin kita perlu tahu 2 keyword yang akan kita gunakan, yaitu @mixin untuk mendeklarasikan mixin yang kita buat, dan @include untuk memanggil mixin yang kita buat.
+
+Oke kita buat beberapa contoh penggunaan mixin, misalnya kita ingin membuat header dan footer yang kita miliki menjadi navigasi yang berjejer ke samping seperti ini
+
+.header ul, .footer ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.header ul li, .footer ul li {
+  display: inline-block;
+}
+
+lalu kita ingin membuat setiap link yang kita punya memiliki warna background yang berbeda, kita tidak bisa menggunakan selector
+
+.header ul li, .footer ul li {
+
+}
+
+karena itu kita harus membuat selector baru lagi
+.header ul li {
+
+}
+
+.footer ul li {
+
+}
+
+daripada kita menulis selector yang berulang seperti ini dengan mixin kita bisa memasukan style yang kita gunakan untuk keduanya tanpa selector lain.
+
+Untuk membuat mixin yang paling sederhana kita bisa membuat dengan cara seperti berikut
+
+@mixin nama-mixin {
+  // style kita
+}
+
+ingat jika kita tidak menggunakan mixin yang sudah kita buat maka mixin ini tidak akan dicompile kedalam bentuk css
+
+contoh mixin
+
+@mixin inline-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  li {
+    display: inline-block;
+  }
+}
+
+dan cara menggunakan mixin pun cukup mudah, kita bisa gunakan cara seperti ini
+
+.header ul {
+  @include inline-list();
+
+  li {
+    background-color: red;
+
+    a {
+      color: blue;
+    }
+  }
+}
+
+dan keuntungannya dengan cara ini kita juga bisa langsung menggunaankannya untuk footer
+
+.footer ul {
+  @include inline-list();
+
+  li {
+    background-color: blue;
+
+    a {
+      color: red
+    }
+  }
+}
+
+nah dengan begini sudah terlihat lebih rapih, tapi kita bisa membuatnya lebih bagus lagi, misal kita memiliki sebuah container dengan 3 kotak didalamnya, nah ceritanya kita ingin 3 kotak ini ada di tengah container baik secara horizontal ataupun vertikal, karena itu kita bisa gunakan flexbox, dan satu lagi kita inginnya 3 kotak ini berurutan dari kotak 3 ke 1 bukan kotak 1 ke 3, di flexbox kita bisa melakukannya dengna flex-direction, tapi bisa saja container kita yang lain urutannya tidak seperti itu, karena itu kita bisa memanfaatkan arguments pada mixin. Contohnya
+@mixin nama-mixin($arguments: nilai-default-optional) {
+
+}
+
+
+@mixin flexbox($direction: row) {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: $direction;
+}
+
+.container {
+  @include flexbox(row-reverse);
+}
