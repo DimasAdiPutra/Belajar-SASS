@@ -55,7 +55,7 @@ Setelah itu untuk mengcompile file sass kita dengan dart sass, kita bisa menggun
 
 sass pathawal/folder/tempat/menyimpannya.scss pathtujuan/folder/tempat/menyimpannya/scss
 
-contoh
+contoh:
 
 sass 5.Modules/Latihan/scss/main.scss 5.Modules/Latihan/css/main.css
 
