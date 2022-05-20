@@ -1,0 +1,64 @@
+Modules adalah sebuah cara penulisan code sass kita lebih modular / mudah untuk dikelola. Karena nanti semakin besar project yang kita buat, pasti akan semakin banyak code yang kita buat dan agar lebih mudah untuk dikelola, kita bisa gunakan konsep module ini.
+
+Untuk menggunakan Modules pada Sass ada 2 keyword yang perlu kita ketahui yaitu @import dan @use
+
+Untuk latihan kali ini, kita akan menggunakan folder latihan yang sudah kita buat di materi sebelumnya, dan kita akan memisahkan mixin yang kita buat ke dalam 1 file terpisah, kita bisa buat nama filenya dengan diawali underscore(_), kenapa? karena file sass yang diawali dengan underscore(_) itu pertama, menandakan bahwa file itu bertipe partials dan bukan file utama scssnya, ke2 file yang menggunakan underscore(_) diawalnya tidak akan melalui proses compile karena sass tau bahwa file ini adalah file yang akan dipanggil oleh file sass yang utama.
+
+Setelah kita buat filenya, kita bisa langsung memindahkan semua mixin yang sudah kita buat ke dalam file _mixin yang baru kita buat tadi, lalu harusnya file main yang kita punya akan error, kenapa error? karena mixin yang digunakan di main sudah kita pindahkan ke file lain, jadi dia tidak tahu apa yang ada pada mixin itu, karena itu kita akan melakukan import lebih dulu.
+
+@import 'nama-file';
+
+@import 'mixin';
+
+kita tidak perlu menulis underscore(_)nya atau ekstensinya karena sass sudah cukup pintar untuk membantu kita mencarikan semua itu, tapi hati-hati saat menggunakan keyword @import karena css biasa pun sekarang sudah memiliki fungsi @import tapi bedanya di css biasa penulisannya itu seperti ini
+
+@import url('./_mixin.scss');
+
+inilah yang menjadi salah satu alasan untuk tidak lagi menggunakan @import dan menggantinya dengan @use, tapi untuk saat ini kita akan mencobanya menggunakan @import
+
+contoh lain penggunaan module adalah saat kita ingin menulis code scss yang kita miliki menjadi persection, misal header memiliki file tersendiri dan footer memiliki file tersendiri, lalu kita tinggal melakukan import lagi seperti tadi
+
+@import 'header';
+@import 'footer';
+
+jika file partials yang kita buat sudah banyak, biasanya kita akan menyimpannya kedalam folder baru dengan nama 'module'
+
+Oke, sekarang kita akan membahas kenapa sih kita disarankan untuk tidak menggunakan @import lagi bahkan oleh sass sendiri?
+
+1. Dengan @import semua variable, mixin dan function bisa diakses secara global. satu sisi ini memudahkan kita, disisi lain ini akan menjadi problem saat project kita sudah besar dan sudha memiliki terlalu banyak variable atau saat kita menggunakan framework lain.
+
+2. Karena Variable itu global, setiap kita membuat variable kita harus memberikan prefix untuk menandakan bahwa itu milik kita.
+
+3. @extend rule juga menjadi global, jadi nanti kita akan menjadi kesulitan saat menggunakan pewarisan atau inheritance.
+
+4. Saat kita melakukan @import berulang kali waktu eksekusinya akan menjadi lebih besar.
+
+jika kita sudha terlanjur menggunakan @import ada cara untuk migrasinya di situs resmi sass, kalian bisa melihatnya sendiri karena kita tidak akan membahasnya disini.
+
+Sekarang kita akan menggunakan @use, tapi ternyata dengan @use pun masih ada problemnya.
+
+Jadi Sass yang kita install itu ada beberapa tipe, dan Sass yang kita install di vscode itu bernama lint Sass, dan kalau sassnya kita install di mesin kita atau dilocal itu namanya dart sass, dan problemnya @use ini hanya bisa digunakan oleh sass yang versi dart, jadi gimana cara mengatasinya? kita bisa install sass dengan menggunakan aplikasi, atau kita instal di command line kita.
+
+Setelah kita menginstall dart sass, kita tidak bisa langsung mengganti begitu saja @import dengan @use, karena perilaku dari @use itu berbeda dengan @import.
+
+Seperti yang kita tahu @import menjadikan semua variable, mixin dan function menjadi global accesible tapi @use tidak seperti itu, karena kita menggunakan mixin pada header dan footer kita harus melakukan @use di file header dan footer yang membutuhkannya dan bukan di file main.
+
+dan cara memanggilnya pun tidak bisa langsung memanggil begitu saja, kita harus memanggilnya dengan cara
+
+@use namaFile.nama-mixinnya();
+
+@use mixin.flexbox();
+
+jadi seperti memanggil object
+
+Setelah itu untuk mengcompile file sass kita dengan dart sass, kita bisa menggunakan perintah
+
+sass pathawal/folder/tempat/menyimpannya.scss pathtujuan/folder/tempat/menyimpannya/scss
+
+contoh
+
+sass 5.Modules/Latihan/scss/main.scss 5.Modules/Latihan/css/main.css
+
+atau jika file mixin kita berada di folder lagi, kita tinggal sesuaikan saja pathnya, dan kita juga berikan nama baru atau alias saat melakukan pemanggilan
+
+@use 'submodules/mixin' as m;

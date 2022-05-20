@@ -1,0 +1,52 @@
+.header ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.header ul li {
+  display: inline-block;
+}
+.header ul li {
+  background-color: aqua;
+  padding: 1em;
+}
+.header ul li a {
+  color: salmon;
+}
+
+.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row-reverse;
+  width: 600px;
+  height: 400px;
+  background-color: lightcyan;
+}
+.container .box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  width: 60px;
+  height: 40px;
+  background-color: greenyellow;
+}
+
+.footer ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.footer ul li {
+  display: inline-block;
+}
+.footer ul li {
+  background-color: teal;
+  padding: 0.8em;
+}
+.footer ul li a {
+  color: lightskyblue;
+}
+
+/*# sourceMappingURL=main.css.map */

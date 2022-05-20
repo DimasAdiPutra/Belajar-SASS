@@ -1,0 +1,11 @@
+// @import "module/mixin";
+// @import "module/header";
+// @import "module/container";
+// @import "module/footer";
+
+// atau panggil dengan satu baris
+// @import "module/mixin", "module/header", "module/container", "module/footer";
+
+@import "module/header";
+@import "module/container";
+@import "module/footer";
