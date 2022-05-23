@@ -1,0 +1,10 @@
+Built-In Function / Modules adalah fungsi-fungsi bawaan yang dibuat oleh sass dan bisa langsung kita gunakan, ada beberapa kategori untuk built in modules, yaitu:
+- Color
+- List
+- Map
+- Math
+- Meta
+- Selector
+- String
+
+Untuk melihat built in function apa saja yang ada kalian bisa melihatnya di situs resmi milik sass dan mencobanya secara langsung satu persatu supaya lebih paham
